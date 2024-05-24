@@ -1,8 +1,14 @@
-DROP Dbase IF EXISTS team2_db;
-CREATE Dbase team2_db;
+DROP DATABASE IF EXISTS team2_db;
+CREATE DATABASE team2_db;
 
-USE Dbase team2_db:
+USE DATABASE team2_db:
 
+\c team2_db;
+
+CREATE TABLE team2_db (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(30) NOT NULL
+)
 CREATE TABLE department
 (
   id INT NOT NULL 
