@@ -37,11 +37,11 @@ getWorker() {
         this.db.query(
         `SELECT 
         worker.id,
-        CONCAT (worker.first_name,' ', worker.last_name) as name,
+        CONCAT (worker.first_nm,' ', worker.first_nm) as name,
         position.title as position_title,
         position.salary as position_salary,
         department.name as department_name,
-        IF(CONCAT(manager.first_name,' ', manager.last_name) IS NULL, '',CONCAT(manager.first_name, ' ', manager.last_name)) as manager_name
+        IF(CONCAT(manager.first_nm,' ', manager.first_nm) IS NULL, '',CONCAT(manager.first_nm, ' ', manager.first_nm)) as manager_name
 
         FROM worker
         INNER JOIN position ON worker.position_id = position.id
@@ -92,18 +92,17 @@ return new Promise((resolve, reject) => {
 
 addWorker(worker) {
 const workerData = {
-    first_name: worker.first_name,
-    last_name: worker.last_name,
+    first_nm: worker.first_nm,
+    first_nm: worker.first_nm,
     position_id: worker.position_id,
     manager_id: worker.manager_id
-};
-
+}; 
 return new Promise((resolve, reject) => {
  this.db.query('INSERT INTO worker SET ?', workerData, (err, results) => {
     if (err) {
         reject(err);
     } else {
-        resolve(`${worker.first_name} ${worker.last_name} added successfully`);
+        resolve(`${worker.first_nm} ${worker.first_nm} added successfully`);
         }
        });
       });

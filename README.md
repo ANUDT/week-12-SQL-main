@@ -82,9 +82,9 @@ As the image illustrates, your schema should contain the following three tables:
 
   * `id`: `SERIAL PRIMARY KEY`
 
-  * `first_name`: `VARCHAR(30) NOT NULL` to hold worker first name
+  * `first_nm`: `VARCHAR(30) NOT NULL` to hold worker first name
 
-  * `last_name`: `VARCHAR(30) NOT NULL` to hold worker last name
+  * `first_nm`: `VARCHAR(30) NOT NULL` to hold worker last name
 
   * `position_id`: `INTEGER NOT NULL` to hold reference to worker position
 

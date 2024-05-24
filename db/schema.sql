@@ -26,8 +26,8 @@ CREATE TABLE worker
 (
   id INT NOT NULL
   AUTO_INCREMENT PRIMARY KEY,
-  first_name VARCHAR (30),
-  last_name VARCHAR (30),
+  first_nm VARCHAR (30),
+  first_nm VARCHAR (30),
   position_id INT,
   manager_id INT,
   FOREIGN KEY (position_id)

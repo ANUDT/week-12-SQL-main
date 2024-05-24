@@ -45,12 +45,12 @@ const MaiMeQuestions = [
   const AddEmpQuestions = [
     {
       type: "input",
-      name: "first_name",
+      name: "first_nm",
       message: "Enter the first name of worker...",
     },
     {
       type: "input",
-      name: "last_name",
+      name: "first_nm",
       message: "Enter the last name of worker...",
     },
     {
