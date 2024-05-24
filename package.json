@@ -1,20 +1,17 @@
 {
-  "name": "team2-tracker",
+  "name": "23-ins_prepared-statements",
   "version": "1.0.0",
-  "description": "SQL",
+  "description": "",
   "main": "index.js",
-
-  "scripts":{
-    "start": "node index",
-    "Dbase": "node ./db/index"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "asciiart-logo": "^0.2.6",
-    "inquirer": "8.2.4",
+    "express": "^4.17.1",
     "pg": "^8.11.3"
-      }
+  }
 }
   
   
