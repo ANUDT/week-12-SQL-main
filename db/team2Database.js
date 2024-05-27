@@ -1,4 +1,4 @@
-const Dbase = require('./Database.js');
+const Database = require('./Database.js');
 
 class Team2Dbase extends Database {
     constructor(options) {
@@ -8,8 +8,7 @@ class Team2Dbase extends Database {
 
 getUnits() {
   return new Promise((resolve, reject) => {
-    this.db.query('SELECT * FROM department', 
-    (err, results) => {
+    this.db.query('SELECT * FROM department', (err, results) => {
       if (err) reject(err);
       else resolve(results.rows);
     });
@@ -23,12 +22,14 @@ getPositions () {
     `SELECT position.id, position.title, position.salary, department.name AS department_name 
     FROM position 
     INNER JOIN department ON position.department_id = department.id`,
-    (err, results) => {
-      if (err) reject(err);
+    (err, results) => { if (err) reject(err);
       else resolve(results.rows);
-    });
-  });
-}
+     }
+    );
+   });
+  };
+
+
 
 getWorkers() {
     return new Promise((resolve, reject) => {
