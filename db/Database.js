@@ -1,27 +1,26 @@
 const { Pool } = require("pg");
 
-class Dbase {
+class Database {
   constructor(options) {
     this.options = options;
     this.db = null;
   }
 
   validate() {
-    const { host, user, password, Dbase } = this.options;
-    if (!host || !user || !password || !Dbase)
+    const { host, user, password, database } = this.options;
+    if (!host || !user || !password || !database)
       throw new Error("Invalid Dbase Configuration");
-    return;
   }
 
   connect() {
     this.validate();
-    const { host, user, password, Dbase } = this.options;
+    const { host, user, password, database } = this.options;
     const pool = new Pool({
-      host: host,
-      user: user,
+      host,
+      user,
       password: process.env.DB_PASSWORD || password,
       Dbase: Dbase,
-      port: 5432, // Default PostgreSQL port
+      port: 5432, 
     });
     this.db = pool;
   }
@@ -30,4 +29,4 @@ class Dbase {
   }
 }
 
-module.exports = Dbase;
+module.exports = Database;
