@@ -83,15 +83,14 @@ return new Promise((resolve, reject) => {
 
 UpdateWorkerposition(worker) {
  return new Promise((resolve, reject) => {
-  this.db.query('UPDATE worker SET position_id=? WHERE id=?', [worker.position_id, worker.worker_id], (err, results) => {
-    if (err) {
-      reject(err);
-     }
-    resolve (results);
+  const { worker_id, position_id } = worker;
+  this.db.query('UPDATE worker SET position_id= $1 WHERE id = $2 RETURNING *', [position_id, worker_id], (err, results) => {
+    if (err) reject(err);
+     else resolve (results).rows;
   });
  });
 }
 
-module.exports = WorkerDbase;
+module.exports = Team2Database;
 
         
