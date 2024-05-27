@@ -54,37 +54,32 @@ addDepartment(department) {
  return new Promise((resolve, reject) => {
   this.db.query('INSERT INTO department(name) VALUES ($1) RETURNING *', { name: department.department_name }, (err, results) => {
    if (err) reject(err);
- else resolve(`Department ${department.department_name} added successfully`);
+    else resolve(`Department ${department.department_name} added successfully`);
+   });
   });
- });
-}
+ }
 
 addPosition(position) {
-return new Promise((resolve, reject) => {
+ return new Promise((resolve, reject) => {
   const { title, salary, department_id } = worker;
-  this.db.query('INSERT INTO position (title, salary, department_id ) VALUES ($1, $2, $3) RETURNING *',
-    [title, salary, department_id] (err, results) => {
+   this.db.query('INSERT INTO position (title, salary, department_id ) VALUES ($1, $2, $3) RETURNING *',
+   [title, salary, department_id] (err, results) => {
     if (err) reject(err);
      else resolve(`Position ${title} added successfully`);
+   });
   });
- });
-}
+ }
 
 addWorker(worker) {
-const workerData = {
-    first_nm: worker.first_nm,
-    first_nm: worker.first_nm,
-    position_id: worker.position_id,
-    manager_id: worker.manager_id
-}; 
 return new Promise((resolve, reject) => {
+ const { first_nm, last_nm, position_id, manager_id } = worker;
   this.db.query('INSERT INTO worker (first_nm, last_nm, position_id, manager_id) VALUES ($1, $2, $3, $4) RETURNING *',
-  [first_nm, last_nm, position_id, manager_id] (err, results) => {
-  if (err) reject(err);
-   else resolve(`${first_nm} ${last_nm} added successfully`);
-});
-});
-}
+   [first_nm, last_nm, position_id, manager_id] (err, results) => {
+    if (err) reject(err);
+     else resolve(`${first_nm} ${last_nm} added successfully`);
+    });
+   });
+  }
 
 UpdateWorkerposition(worker) {
  return new Promise((resolve, reject) => {
