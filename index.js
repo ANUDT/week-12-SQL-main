@@ -1,5 +1,5 @@
 const inquirer = require ('inquirer');
-const db = request ('./Database.js');
+const Team2Database = require ('./db/team2Database.js');
 
 const { 
   MaiMeQuestions, 
@@ -7,88 +7,89 @@ const {
   AddposQuestions, 
   AddEmpQuestions, 
   UpdateWorkerposQuestions,
-} = require ("./questions.js");
-const WorkerDbase = require("./db/team2Dbase.js");
+} = require ('./questions.js');
 
-const db = new team2Dbase({
+const db = new Team2Database({
   host: localhost,
   user: 'root',
   password: 'Happy',
-  Dbase: 'worker_db'
-
+  database: 'team2_db'
 });
 
 db.connect();
 
 const doMenuQuestions = () => {
-  inquirer
-  .prompt(MaiMeQuestions)
-  .then((response) => {
-
-    switch (response.option) {
+  inquirer.prompt(MaiMeQuestions).then((response) => {
+   switch (response.option) {
       case 'view_Unit':
-        view_Unit();
+        viewUnit();
         break;
       case 'view_positions':
-        view_positions();
+        viewpositions();
         break;
       case 'view_worker':
-        view_Unit();
+        viewWorkers();
         break;
       case 'add_department':
-        view_department();
+        addDepartment();
         break;
       case 'add_position':
-        view_position();
+        addPosition();
+        break;
+      case 'add_worker':
+        addWorker();
+        break;
+      case 'update_position':
+        updateWorkerPosition();
+        break;
+      default:
+        console.log('Invalid option');
+        doMenuQuestions();
         break;
     }
-  })
-}
+  });
+};
 
-const view_Unit = () => {
-  db.getUnit().then((results) => {
+const viewUnit = () => {
+  db.getUnits().then((results) => {
     console.table;(results);
     doMenuQuestions();
   });
-}
+};
 
-const view_positions = () => {
-  db.getpositions().then((results) => {
+const viewPositions = () => {
+  db.getPositions().then((results) => {
     console.table;(results);
     doMenuQuestions();
   });
-}
-const view_worker = () => {
-db.getWorker().then((results) => {
+};
+
+const viewWorkers = () => {
+db.getWorkers().then((results) => {
   console.table;(results);
   doMenuQuestions();
-});
+ });
 }
 
-const add_department = () => {
-  inquirer
-   .prompt(AddDepQuestions)
-   .then ((response) => {
+const addDepartment = () => {
+  inquirer .prompt(AddDepQuestions).then ((response) => {
     db.addDepartment (response). then((results)=> {
       console.log('\n', results, '\n');
       doMenuQuestions();
+   });
   });
-  });
-}
-const add_position = () => {
-  db.getUnit().then((results) => {
-    const DepartmentQuestion = AddposQuestions[2];
-    results.forEach((department) => {
-      departmentQuestion.choices.push({
-        value: department_id,
-        name: department.name
-  });
-  });
+ };
 
-  inquirer
-  .prompt(AddposQuestions)
-   .then ((response) => {
-    db.addposition (response). then((results)=> {
+const addPosition = () => {
+  db.getUnits().then((results) => {
+    const departmentQuestion = AddposQuestions[2]; results.forEach((department) => {
+      departmentQuestion.choices.push({
+        value: department.id,
+        name: department.name
+    });
+   });
+  inquirer.prompt(AddposQuestions).then ((response) => {
+    db.addPosition (response). then((results)=> {
       console.log('\n', results, '\n');
       doMenuQuestions();
           });
@@ -96,9 +97,10 @@ const add_position = () => {
       });
 }
 
-const add_worker = () => {
-  db.getpositions().then((results) => {
-    const positionQuestion = AddEmpQuestions[3];
+const addWorker = () => {
+  db.getPositions().then((results) => {
+    const unitQuestion = AddEmpQuestions[2];
+    const managerQuestion = AddEmpQuestions[3];
     results.forEach((worker) => {
       managerQuestion.choices.push({
         value: worker.id,
@@ -111,9 +113,7 @@ const add_worker = () => {
           name: 'None'
           });
           
-         inquirer
-          .prompt(AddEmpQuestions)
-           .then ((response) => {
+         inquirer.prompt(AddEmpQuestions).then ((response) => {
             db.addWorker(response). then((results)=> {
               console.log('\n', results, '\n');
               doMenuQuestions();
@@ -122,25 +122,32 @@ const add_worker = () => {
               });
             }
 
-  const update_position = () => {
-  db.getWorker().then((results) => {
-    const workerQuestion = UpdateWorkerposQuestions[0];
-    results.forEach((worker) => {
-      managerQuestion.choices.push({
+  const updateWorkersPosition = () => {
+  db.getWorkers().then((results) => {
+    const workerQuestion = UpdateWorkerposQuestions[0]; results.forEach((worker) => {
+      workerQuestion.choices.push({
         value: worker.id,
         name: worker.name
         });
       });
 
-      db.getpositions().then((results) => {
+      db.getPositions().then((results) => {
         const positionQuestion = UpdateWorkerposQuestions[1];
         results.forEach((position) => {
           positionQuestion.choices.push({
-            value: position_id,
+            value: position.id,
             name: position.title
           });
         });
 
+        inquirer.prompt(UpdateWorkerposQuestions).then((response) => {
+          db.updateWorkerPosition(response).then((results) => {
+            console.log('\n', results, '\n');
+            doMenuQuestions();
+          });
+        });
+      });
+    });
+  };
   
-  
-   doMenuQuestions();
+doMenuQuestions();

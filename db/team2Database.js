@@ -30,7 +30,7 @@ getPositions () {
   });
 }
 
-getWorker() {
+getWorkers() {
     return new Promise((resolve, reject) => {
         this.db.query(
                `SELECT worker.id, 
