@@ -6,13 +6,14 @@ const {
   AddEmpQuestions,
   UpdateWorkerpositionQuestions,
 } = require("./questions.js");
-//const WorkerDbase = require("./db/team2Dbase.js");
 
-const db = new team2Dbase({
-  host: localhost,
-  user: "root",
-  password: "Happy",
-  Dbase: "worker_db",
+const Team2Database = require("./db/team2Database.js");
+
+const db = new Team2Database({
+user: "rootpostgres",
+password: "password",
+host: "localhost",
+database: "team2_db",
 });
 
 db.connect();
