@@ -1,153 +1,167 @@
-const inquirer = require ('inquirer');
-const Team2Database = require ('./db/team2Database.js');
+const inquirer = require("inquirer");
+const {
+  MaiMeQuestions,
+  AddDepartmentQuestions,
+  AddpositionQuestions,
+  AddEmpQuestions,
+  UpdateWorkerpositionQuestions,
+} = require("./questions.js");
+//const WorkerDbase = require("./db/team2Dbase.js");
 
-const { 
-  MaiMeQuestions, 
-  AddDepQuestions, 
-  AddposQuestions, 
-  AddEmpQuestions, 
-  UpdateWorkerposQuestions,
-} = require ('./questions.js');
-
-const db = new Team2Database({
+const db = new team2Dbase({
   host: localhost,
-  user: 'root',
-  password: 'Happy',
-  database: 'team2_db'
+  user: "root",
+  password: "Happy",
+  Dbase: "worker_db",
 });
 
 db.connect();
 
 const doMenuQuestions = () => {
   inquirer.prompt(MaiMeQuestions).then((response) => {
-   switch (response.option) {
-      case 'view_Unit':
-        viewUnit();
+    switch (response.option) {
+      case "view_Unit":
+        view_Unit();
         break;
-      case 'view_positions':
-        viewpositions();
+      case "view_positions":
+        view_positions();
         break;
-      case 'view_worker':
-        viewWorkers();
+      case "view_worker":
+        view_worker();
         break;
-      case 'add_department':
-        addDepartment();
+      case "add_department":
+        add_department();
         break;
-      case 'add_position':
-        addPosition();
+      case "add_position":
+        add_position();
         break;
-      case 'add_worker':
-        addWorker();
-        break;
-      case 'update_position':
-        updateWorkerPosition();
-        break;
-      default:
-        console.log('Invalid option');
-        doMenuQuestions();
+      case "add_worker":
+      add_worker();
+      break;
+      case "update_position":
+        update_position();
         break;
     }
   });
 };
 
-const viewUnit = () => {
-  db.getUnits().then((results) => {
-    console.table;(results);
+const view_Unit = () => {
+  db.getUnit().then((results) => {
+    console.table;
+    results;
     doMenuQuestions();
   });
 };
 
-const viewPositions = () => {
-  db.getPositions().then((results) => {
-    console.table;(results);
+const view_positions = () => {
+  db.getpositions().then((results) => {
+    console.table;
+    results;
+    doMenuQuestions();
+  });
+};
+const view_worker = () => {
+  db.getWorker().then((results) => {
+    console.table;
+    results;
     doMenuQuestions();
   });
 };
 
-const viewWorkers = () => {
-db.getWorkers().then((results) => {
-  console.table;(results);
-  doMenuQuestions();
- });
-}
-
-const addDepartment = () => {
-  inquirer .prompt(AddDepQuestions).then ((response) => {
-    db.addDepartment (response). then((results)=> {
-      console.log('\n', results, '\n');
+const add_department = () => {
+  inquirer.prompt(AddDepartmentQuestions).then((response) => {
+    db.addDepartment(response).then((results) => {
+      console.log("\n", results, "\n");
       doMenuQuestions();
-   });
-  });
- };
-
-const addPosition = () => {
-  db.getUnits().then((results) => {
-    const departmentQuestion = AddposQuestions[2]; results.forEach((department) => {
-      departmentQuestion.choices.push({
-        value: department.id,
-        name: department.name
     });
-   });
-  inquirer.prompt(AddposQuestions).then ((response) => {
-    db.addPosition (response). then((results)=> {
-      console.log('\n', results, '\n');
-      doMenuQuestions();
-          });
-        })
+  });
+};
+const add_position = () => {
+  db.getUnit().then((results) => {
+    const DepartmentQuestion = AddpositionQuestions[2];
+    results.forEach((department) => {
+      departmentQuestion.choices.push({
+        value: department_id,
+        name: department.name,
       });
-}
+    });
 
-const addWorker = () => {
-  db.getPositions().then((results) => {
-    const unitQuestion = AddEmpQuestions[2];
-    const managerQuestion = AddEmpQuestions[3];
+    inquirer.prompt(AddpositionQuestions).then((response) => {
+      db.addposition(response).then((results) => {
+        console.log("\n", results, "\n");
+        doMenuQuestions();
+      });
+    });
+  });
+};
+
+const add_worker = () => {
+  db.getpositions().then((results) => {
+    const positionQuestion = AddEmpQuestions[3];
     results.forEach((worker) => {
       managerQuestion.choices.push({
         value: worker.id,
-        name: worker.name
-        });
+        name: worker.name,
       });
+    });
 
-          managerQuestion.choices.push({
-          value: null,
-          name: 'None'
-          });
-          
-         inquirer.prompt(AddEmpQuestions).then ((response) => {
-            db.addWorker(response). then((results)=> {
-              console.log('\n', results, '\n');
-              doMenuQuestions();
-                  });
-                })
-              });
-            }
+    managerQuestion.choices.push({
+      value: null,
+      name: "None",
+    });
 
-  const updateWorkersPosition = () => {
-  db.getWorkers().then((results) => {
-    const workerQuestion = UpdateWorkerposQuestions[0]; results.forEach((worker) => {
-      workerQuestion.choices.push({
+    inquirer.prompt(AddEmpQuestions).then((response) => {
+      db.addWorker(response).then((results) => {
+        console.log("\n", results, "\n");
+        doMenuQuestions();
+      });
+    });
+  });
+};
+
+const update_position = () => {
+  db.getWorker().then((results) => {
+    const workerQuestion = UpdateWorkerpositionQuestions[0];
+    results.forEach((worker) => {
+      managerQuestion.choices.push({
         value: worker.id,
-        name: worker.name
-        });
+        name: worker.name,
       });
+    });
 
-      db.getPositions().then((results) => {
-        const positionQuestion = UpdateWorkerposQuestions[1];
-        results.forEach((position) => {
-          positionQuestion.choices.push({
-            value: position.id,
-            name: position.title
-          });
-        });
-
-        inquirer.prompt(UpdateWorkerposQuestions).then((response) => {
-          db.updateWorkerPosition(response).then((results) => {
-            console.log('\n', results, '\n');
-            doMenuQuestions();
-          });
+    db.getpositions().then((results) => {
+      const positionQuestion = UpdateWorkerpositionQuestions[1];
+      results.forEach((position) => {
+        positionQuestion.choices.push({
+          value: position_id,
+          name: position.title,
         });
       });
     });
-  };
-  
+    inquirer.prompt(UpdateWorkerpositionQuestions).then((response) => {
+      db.updateWorkerposition(response).then((results) => {
+        console.log("\n", results, "\n");
+        doMenuQuestions();
+      });
+    });
+  });
+};
+
 doMenuQuestions();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
