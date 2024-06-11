@@ -1,13 +1,15 @@
 {
-  "name": "23-ins_prepared-statements",
+  "name": "week 12 SQL",
   "version": "1.0.0",
-  "description": "",
+  "description": "week-12-SQL-main",
   "main": "index.js",
-  "scripts": {
+ "scripts": {
     "start": "node index.js",
-    "test": "npm run"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "seeds": "node db/seeds.sql"
+
   },
-  "author": "",
+  "author": "Me",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
