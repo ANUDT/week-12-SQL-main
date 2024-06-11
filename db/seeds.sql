@@ -18,7 +18,7 @@ INSERT INTO worker  (id, first_nm, first_nm, position_id, manager_id) VALUES
 (11,'Janet', 'Jackson', 5, 6),
 (12,'Adriana', 'Grande', 3, 4),
 (13,'Jennifer', 'Lopez', 1, 2),
-(14,'Shakira', 'Shakira', 6, NULL),
+(14,'Shakira', 'Shamira', 6, NULL),
 (15,'Shabba', 'Ranks', 3, 4),
 (16,'Bad', 'BoltonBunny', 4, 6);
 

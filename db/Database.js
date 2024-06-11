@@ -8,9 +8,9 @@ class Database {
 
   validate() {
     const { host, user, password, database } = this.options;
-    if (!host || !user || !password || !database)
-      throw new Error("Invalid Dbase Configuration");
-  }
+    if (!host || !user || !password || !database){
+      throw new Error("Invalid Configuration");
+  }}
 
   connect() {
     this.validate();
@@ -19,7 +19,7 @@ class Database {
       host,
       user,
       password: process.env.DB_PASSWORD || password,
-      Dbase: Dbase,
+      Database: Database,
       port: 5432, 
     });
     this.db = pool;
