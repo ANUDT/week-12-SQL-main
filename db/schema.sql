@@ -1,7 +1,7 @@
 DROP DATABASE IF EXISTS team2_db;
 CREATE DATABASE team2_db;
 
-USE team2_db;
+\c team2_db;
 
 CREATE TABLE department (
   id SERIAL PRIMARY KEY,
@@ -16,7 +16,7 @@ CREATE TABLE position (
   FOREIGN KEY (department_id)
   REFERENCES department (id)
   ON DELETE SET NULL
-);
+)
 
 CREATE TABLE worker (
   id SERIAL PRIMARY KEY,
