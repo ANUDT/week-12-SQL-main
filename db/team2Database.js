@@ -93,7 +93,7 @@ addDepartment(department)
     });
   
 
-UpdateWorkerposition(worker) 
+updateWorkerPosition(worker) 
  return new Promise((resolve, reject) => {
   const { worker_id, position_id } = worker;
   this.db.query('UPDATE worker SET position_id= $1 WHERE id = $2 RETURNING *', [position_id, worker_id], (err, results) => {
