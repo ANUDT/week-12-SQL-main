@@ -3,16 +3,16 @@
   "version": "1.0.0",
   "description": "week-12-SQL-main",
   "main": "index.js",
- "scripts": {
+  "scripts": {
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "seeds": "node db/seeds.sql"
-
   },
   "author": "Me",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "node.js": "^0.0.1-security",
     "pg": "^8.12.0"
   }
 }

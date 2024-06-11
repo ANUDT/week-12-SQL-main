@@ -16,7 +16,7 @@ CREATE TABLE position (
   FOREIGN KEY (department_id)
   REFERENCES department (id)
   ON DELETE SET NULL
-);
+)
 
 CREATE TABLE worker (
   id SERIAL PRIMARY KEY,
