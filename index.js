@@ -4,7 +4,7 @@ const {
   AddDepartmentQuestions,
   AddPosQuestions,
   AddEmpQuestions,
-  UpdateWorkerpositionQuestions,
+  UpdateWorkersQuestions,
 } = require("./questions.js");
 
 const Team2Database = require("./db/team2Database.js");
@@ -59,7 +59,7 @@ const view_Unit = () => {
 };
 
 const view_positions = () => {
-  db.getpositions().then((results) => {
+  db.getPositions().then((results) => {
     console.table(results);
 
     doMenuQuestions();
@@ -92,7 +92,7 @@ const add_position = () => {
     });
 
     inquirer.prompt(AddPosQuestions).then((response) => {
-      db.addposition(response).then((results) => {
+      db.addPosition(response).then((results) => {
         console.log("\n", results, "\n");
         doMenuQuestions();
       });
@@ -101,7 +101,7 @@ const add_position = () => {
 };
 
 const add_worker = () => {
-  db.getpositions().then((results) => {
+  db.getPositions().then((results) => {
     const positionQuestion = AddEmpQuestions[3];
     results.forEach((worker) => {
       managerQuestion.choices.push({
@@ -126,7 +126,7 @@ const add_worker = () => {
 
 const update_position = () => {
   db.getWorker().then((results) => {
-    const workerQuestion = UpdateWorkerpositionQuestions[0];
+    const workerQuestion = UpdateWorkerQuestions[0];
     results.forEach((worker) => {
       managerQuestion.choices.push({
         value: worker.id,
@@ -134,8 +134,8 @@ const update_position = () => {
       });
     });
 
-    db.getpositions().then((results) => {
-      const positionQuestion = UpdateWorkerpositionQuestions[1];
+    db.gePositions().then((results) => {
+      const positionQuestion = UpdateWorkerQuestions[1];
       results.forEach((position) => {
         positionQuestion.choices.push({
           value: position_id,
@@ -143,8 +143,8 @@ const update_position = () => {
         });
       });
     });
-    inquirer.prompt(UpdateWorkerpositionQuestions).then((response) => {
-      db.updateWorkerposition(response).then((results) => {
+    inquirer.prompt(UpdateWorkerQuestions).then((response) => {
+      db.updateWorker(response).then((results) => {
         console.log("\n", results, "\n");
         doMenuQuestions();
       });

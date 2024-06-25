@@ -18,7 +18,7 @@ CREATE TABLE position (
   ON DELETE SET NULL
 )
 
-CREATE TABLE worker (
+CREATE TABLE workers (
   id SERIAL PRIMARY KEY,
   first_nm VARCHAR(35),
   last_nm VARCHAR(35),

@@ -67,7 +67,7 @@ const MaiMeQuestions = [
     },
   ];
   
-  const UpdateWorkerposQuestions = [
+  const UpdateWorkerQuestions = [
     {
       type: "list",
       name: "worker_id",
@@ -87,6 +87,6 @@ const MaiMeQuestions = [
     AddDepQuestions,
     AddPosQuestions,
     AddEmpQuestions,
-    UpdateWorkerposQuestions,
+    UpdateWorkerQuestions,
   };
   
