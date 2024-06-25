@@ -23,7 +23,7 @@ const MaiMeQuestions = [
     },
   ];
   
-  const AddposQuestions = [
+  const AddPosQuestions = [
     {
       type: "input",
       name: "title",
@@ -85,7 +85,7 @@ const MaiMeQuestions = [
   module.exports = {
     MaiMeQuestions,
     AddDepQuestions,
-    AddRolQuestions,
+    AddPosQuestions,
     AddEmpQuestions,
     UpdateWorkerposQuestions,
   };

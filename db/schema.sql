@@ -26,5 +26,5 @@ CREATE TABLE worker (
   manager_id INT,
   department_id INT,
   FOREIGN KEY (position_id) REFERENCES position (id) ON DELETE SET NULL,
-  FOREIGN KEY (department_id) REFERENCES department_id (id) ON DELETE SET NULL
+  FOREIGN KEY (department_id) REFERENCES department (id) ON DELETE SET NULL
 );

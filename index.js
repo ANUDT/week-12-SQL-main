@@ -2,7 +2,7 @@ const inquirer = require("inquirer");
 const {
   MaiMeQuestions,
   AddDepartmentQuestions,
-  AddpositionQuestions,
+  AddPosQuestions,
   AddEmpQuestions,
   UpdateWorkerpositionQuestions,
 } = require("./questions.js");
@@ -10,10 +10,10 @@ const {
 const Team2Database = require("./db/team2Database.js");
 
 const db = new Team2Database({
-user: "rootpostgres",
-password: "password",
-host: "localhost",
-database: "team2_db",
+  user: "postgres",
+  password: "Happy",
+  host: "localhost",
+  database: "team2_db",
 });
 
 db.connect();
@@ -47,17 +47,21 @@ const doMenuQuestions = () => {
 };
 
 const view_Unit = () => {
-  db.getUnit().then((results) => {
-    console.table;
-    results;
+ // console.log("DB variable: ", db)
+ // console.log("Team variable: ", Team2Database)
+
+  db.getUnits().then((results) => {
+    console.log("ALL Departments: ", results);
+
+    console.table(results);
     doMenuQuestions();
   });
 };
 
 const view_positions = () => {
   db.getpositions().then((results) => {
-    console.table;
-    results;
+    console.table(results);
+
     doMenuQuestions();
   });
 };
@@ -79,7 +83,7 @@ const add_department = () => {
 };
 const add_position = () => {
   db.getUnit().then((results) => {
-    const DepartmentQuestion = AddpositionQuestions[2];
+    const DepartmentQuestion = AddPosQuestions[2];
     results.forEach((department) => {
       departmentQuestion.choices.push({
         value: department_id,
@@ -87,7 +91,7 @@ const add_position = () => {
       });
     });
 
-    inquirer.prompt(AddpositionQuestions).then((response) => {
+    inquirer.prompt(AddPosQuestions).then((response) => {
       db.addposition(response).then((results) => {
         console.log("\n", results, "\n");
         doMenuQuestions();

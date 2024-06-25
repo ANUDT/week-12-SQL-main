@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "inquirer": "^8.2.6",
     "node.js": "^0.0.1-security",
     "pg": "^8.12.0"
   }
