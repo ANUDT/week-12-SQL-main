@@ -1,3 +1,5 @@
+module.exports = Team2Database;
+
 const Database = require('./Database.js');
 
 class Team2Database extends Database {

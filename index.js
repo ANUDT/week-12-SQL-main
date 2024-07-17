@@ -5,7 +5,7 @@ const {
   AddPosQuestions,
   AddEmpQuestions,
   UpdateWorkersQuestions,
-} = require("./questions.js");
+} = require("./db/questions.js");
 
 const Team2Database = require("./db/team2Database.js");
 
@@ -65,10 +65,10 @@ const view_positions = () => {
     doMenuQuestions();
   });
 };
+
 const view_worker = () => {
   db.getWorker().then((results) => {
-    console.table;
-    results;
+    console.table(results);
     doMenuQuestions();
   });
 };
